@@ -1,0 +1,17 @@
+version: "3.9"  # optional since v1.27.0
+
+services:
+  postgres:
+    image: postgres:13.4
+    ports:
+      - "5433:5432"
+    volumes:
+      - ${SQL_PATH}:/tmp/unitTesting_BD.sql #Change it for your local path
+      - ./init_db.sh:/tmp/init_db.sh
+      - eel_database:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+    #network_mode: host
+
+volumes:
+  eel_database:
